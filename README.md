@@ -1,2 +1,2 @@
 # UnityStack
-a collection of c# unity scripts
+A collection of C# Unity scripts to accelerate the game development process
