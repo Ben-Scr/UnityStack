@@ -18,7 +18,7 @@ namespace BenScr.UnityStack
 
         public string ToString(string preText)
         {
-            return $"{preText}{stopwatch.ElapsedMilliseconds} ms";
+            return $"{preText}:{stopwatch.ElapsedMilliseconds} ms";
         }
     }
 }
