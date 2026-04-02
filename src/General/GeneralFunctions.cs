@@ -6,7 +6,7 @@ using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace BenScr.CubeDash
+namespace BenScr.UnityStack
 {
     public static class GeneralFunctions
     {
@@ -20,13 +20,14 @@ namespace BenScr.CubeDash
             return percent.ToString("0.##").Replace(',', '.') + "%";
         }
 
-        public static IEnumerator DoInXFrames(int frameCount, Action action)
+        public static IEnumerator DoAfterXFrames(int frameCount, Action action)
         {
             for (int i = 0; i < frameCount; i++)
                 yield return null;
 
             action();
         }
+
         public static IEnumerator DoAfterDelay(float delay, Action action)
         {
             yield return new WaitForSeconds(delay);
@@ -59,7 +60,6 @@ namespace BenScr.CubeDash
             var cam = Camera.main;
             var ray = cam.ScreenPointToRay(Input.mousePosition);
 
-            // Ebene: Y = 0 (Normal nach oben)
             var plane = new Plane(Vector3.up, Vector3.zero);
 
             if (plane.Raycast(ray, out float enter))
