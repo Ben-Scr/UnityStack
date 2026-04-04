@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 
 namespace BenScr.UnityStack
 {
+    /*
+     * Used for performance tracking
+     */
+
     public class Timer
     {
         private Stopwatch stopwatch;

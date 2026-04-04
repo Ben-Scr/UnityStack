@@ -36,18 +36,18 @@ namespace BenScr.UnityStack
             activeSounds = new List<GameObject>();
         }
 
-        public static AudioClip GetClipByName_Sfx(string name)
+        public static AudioClip GetClipByName_Sfx(SongData[] sfxTracks, string name)
         {
-            return GameAssets.instance.sfxTracks.FirstOrDefault(s => s.name == name)?.clip ?? null;
+            return sfxTracks.FirstOrDefault(s => s.name == name)?.clip ?? null;
         }
 
-        public static AudioSource PlaySongData_MusicTrack(SongData songData, float offset = 0)
+        public static AudioSource PlaySongData_MusicTrack(SongData songData, bool loop = false, float offset = 0)
         {
             GameObject audioSourceObj = audioPool.Get((int)AudioChannel.Music, instance.audioSourcePrefab, instance.transform);
             var source = audioSourceObj.GetComponent<AudioSource>();
 
             source.clip = songData.clip;
-            source.loop = LevelController.activeLevel.mapSettings.loopSong;
+            source.loop = loop;
             source.time = offset;
             source.volume = songData.baseVolume * instance.musicVolume * instance.masterVolume;
             source.Play();
@@ -57,12 +57,12 @@ namespace BenScr.UnityStack
         }
         public static AudioSource PlaySongData_Music(SongData songData, bool shouldLoop = false, float offset = 0)
         {
-            if(songData == null) return null;
+            if (songData == null) return null;
 
             GameObject audioSourceObj = audioPool.Get((int)AudioChannel.Music, instance.audioSourcePrefab, instance.transform);
             var source = audioSourceObj.GetComponent<AudioSource>();
 
-            source.clip = songData. clip;
+            source.clip = songData.clip;
             source.loop = shouldLoop;
             source.time = offset;
             source.volume = songData.baseVolume * instance.musicVolume * instance.masterVolume;
@@ -72,13 +72,13 @@ namespace BenScr.UnityStack
             return source;
         }
 
-        public static AudioSource PlayAudioClip_Sfx(AudioClip clip, float offset = 0)
+        public static AudioSource PlayAudioClip_Sfx(AudioClip clip, bool loop = false,float offset = 0)
         {
             GameObject audioSourceObj = audioPool.Get((int)AudioChannel.Sound, instance.audioSourcePrefab, instance.transform);
             var source = audioSourceObj.GetComponent<AudioSource>();
 
             source.clip = clip;
-            source.loop = LevelController.activeLevel.mapSettings.loopSong;
+            source.loop = loop;
             source.time = offset;
             source.volume = 0.1f * instance.musicVolume * instance.masterVolume;
             source.Play();
@@ -161,9 +161,9 @@ namespace BenScr.UnityStack
         {
             return AudioManager.GetAudioSourceByClip_Music(clip);
         }
-        public void Play(float offset = 0)
+        public void Play(bool loop = false, float offset = 0)
         {
-            AudioManager.PlaySongData_MusicTrack(this, offset);
+            AudioManager.PlaySongData_MusicTrack(this, loop ,offset);
         }
         public void Stop()
         {

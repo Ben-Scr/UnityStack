@@ -1,23 +1,8 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.IO;
-using System.IO.Compression;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Text;
-using Unity.Collections;
-using Unity.Collections.LowLevel.Unsafe;
-using Unity.Serialization.Json;
-using System;
-using System.IO;
-using System.IO.Compression;
-using System;
-using System.IO;
-using System.IO.Compression;
-using System.Runtime.CompilerServices;
-using Unity.Collections;
-using Unity.Collections.LowLevel.Unsafe;
+using UnityEngine;
 
 
 namespace BenScr.UnityStack
@@ -32,7 +17,7 @@ namespace BenScr.UnityStack
         {
             EnsureDir(path);
 
-            string json = JsonSerialization.ToJson(obj);
+            string json = JsonUtility.ToJson(obj);
             File.WriteAllText(path, json);
         }
         public static T Deserialize<T>(string path, T defaulValue = default)
@@ -40,11 +25,11 @@ namespace BenScr.UnityStack
             try
             {
                 string json = File.ReadAllText(path);
-                return JsonSerialization.FromJson<T>(json);
+                return JsonUtility.FromJson<T>(path);
             }
             catch(Exception ex)
             {
-                Logger.Message(ex.Message);
+                Debug.Log(ex.Message);
                 return defaulValue;
             }
         }
@@ -52,11 +37,11 @@ namespace BenScr.UnityStack
         {
             try
             {
-                return JsonSerialization.FromJson<T>(json);
+                return JsonUtility.FromJson<T>(json);
             }
             catch (Exception ex)
             {
-                Logger.Message(ex.Message);
+                Debug.Log(ex.Message);
                 return defaulValue;
             }
         }
@@ -135,7 +120,7 @@ namespace BenScr.UnityStack
             }
             catch (Exception ex)
             {
-                Logger.Message(ex.Message);
+                Debug.Log(ex.Message);
                 return Array.Empty<T>();
             }
         }

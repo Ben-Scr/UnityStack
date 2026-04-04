@@ -35,9 +35,6 @@ namespace BenScr.UnityStack
         public static SceneType activeScene = SceneType.Persistent;
         public static SceneType lastActiveScene = SceneType.Persistent;
 
-        public static Action<Level> OnLoadEditor;
-        public static Action<Level> OnLoadGame;
-
         private void OnInit()
         {
             if (!IsSceneLoaded(MENU_SCENE))
@@ -49,12 +46,10 @@ namespace BenScr.UnityStack
         private void OnEnable()
         {
             SceneManager.sceneLoaded += OnSceneLoaded;
-            ECSManager.OnInit += OnInit;
         }
         private void OnDisable()
         {
             SceneManager.sceneLoaded -= OnSceneLoaded;
-            ECSManager.OnInit -= OnInit;
         }
 
         private void OnSceneLoaded(Scene scene, LoadSceneMode loadSceneMode)
@@ -63,11 +58,6 @@ namespace BenScr.UnityStack
 
             activeScene = (SceneType)scene.buildIndex;
             OnLoadScene?.Invoke();
-
-            if (activeScene == SceneType.Editor)
-                OnLoadEditor?.Invoke(LevelController.activeLevel);
-            else if (activeScene == SceneType.Game)
-                OnLoadGame?.Invoke(LevelController.activeLevel);
 
             lastActiveScene = activeScene;
         }

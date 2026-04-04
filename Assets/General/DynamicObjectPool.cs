@@ -3,6 +3,10 @@ using UnityEngine;
 
 namespace BenScr.UnityStack
 {
+    /*
+     * Used for pooling GameObjects of different types, identified by a own defined key.
+     */
+
     public class DynamicObjectPool<TKey>
     {
         private Dictionary<TKey, Stack<GameObject>> pools = new();

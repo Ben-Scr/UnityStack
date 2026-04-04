@@ -43,7 +43,7 @@ namespace BenScr.UnityStack
                 OnClick?.Invoke(true);
             }
 
-            Vector3 mousePosition = GeneralFunctions.GetMousePosition();
+            Vector3 mousePosition = CameraUtility.GetMousePosition();
 
             if (mousePosition != lastMousePos)
             {
@@ -74,7 +74,7 @@ namespace BenScr.UnityStack
             if (!ctx.performed) return;
 
             pressMousePosition = Input.mousePosition;
-            pressWorldMousePosition = GeneralFunctions.GetMousePosition();
+            pressWorldMousePosition = CameraUtility.GetMousePosition();
             movedCursorSincePress = false;
             isMouseDown = true;
         }

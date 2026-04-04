@@ -22,14 +22,14 @@ namespace BenScr.UnityStack
 
         public static void ActivateBlur(bool active)
         {
-            if (instance?.volumeProfile.TryGet(out DepthOfField dop) ?? false)
+            if (Instance?.volumeProfile.TryGet(out DepthOfField dop) ?? false)
             {
                 dop.active = active;
             }
         }
         public static void SetVignette(float intensity, float smoothness)
         {
-            if (instance?.volumeProfile.TryGet(out Vignette vignette) ?? false)
+            if (Instance?.volumeProfile.TryGet(out Vignette vignette) ?? false)
             {
                 vignette.intensity.Override(intensity);
                 vignette.smoothness.Override(smoothness);
@@ -38,7 +38,7 @@ namespace BenScr.UnityStack
 
         public static void SetBloom(float intensity, float threshold)
         {
-            if (instance?.volumeProfile.TryGet(out Bloom bloom) ?? false)
+            if (Instance?.volumeProfile.TryGet(out Bloom bloom) ?? false)
             {
                 bloom.intensity.Override(intensity);
                 bloom.threshold.Override(threshold);
