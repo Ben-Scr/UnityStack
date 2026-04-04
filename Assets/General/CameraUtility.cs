@@ -55,7 +55,7 @@ namespace BenScr.UnityStack
                 return hit.point;
             }
 
-            return camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(cam.transform.position.z)));
+            return camera.ScreenToWorldPoint(new Vector3(Input.mousePosition.x, Input.mousePosition.y, Mathf.Abs(camera.transform.position.z)));
         }
 
         public static Vector3 GetMousePositionOnGridPlane()
